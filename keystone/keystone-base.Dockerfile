@@ -20,10 +20,12 @@ RUN apk add --update \
         git \
         && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
-RUN git clone https://github.com/openstack/keystone.git -b stable/queens keystone
-RUN pip install --upgrade pip
-RUN pip install /build/keystone
-RUN pip install dogpile.cache==0.6.2
+RUN git clone https://github.com/openstack/keystone.git -b stable/queens keystone && \
+    virtualenv venv && source venv/bin/activate && \
+    pip install --upgrade pip && \
+    pip install /build/keystone && \
+    pip install dogpile.cache==0.6.2
+#    tar -cvf keystone.tar.gz /build/keystone/venv/*
 
 
 FROM alpine:3.8
@@ -37,11 +39,16 @@ RUN apk add --update \
     && rm -rf /var/cache/apk/* /tmp/* /var/tmp/*
 
 
-COPY --from=build /build/keystone /srv/keystone
+COPY --from=build /root/keystone.tar.gz /srv/keystone.tar.gz
 ## GIT PULL
 #RUN
+RUN tar xvf /srv/keystone.tar.gz -C /srv && rm /srv/keystone.tar.gz &&\
+    #mv /srv/keystone/venv/* /opt/keystone/ && rmdir /opt/keystone/venv && \
+#        for i in /opt/keystone/bin/*; do sed -i 's,^#!.*/bin/python,#!/opt/keystone/bin/python,g' $i; done && \
+    #chown -R root:root /opt/keystone && \
+    ln -s /opt/keystone/etc/keystone /etc/keystone && \
 
-RUN addgroup -S keystone && \
+    addgroup -S   && \
     adduser -S -G keystone keystone && \
     mkdir /var/log/keystone && \
     ln -s /srv/keystone/etc /etc/keystone && \
