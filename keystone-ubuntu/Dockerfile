@@ -10,10 +10,13 @@ RUN apt update && \
     apt install software-properties-common -y && \
     add-apt-repository cloud-archive:queens &&\
     apt install keystone python-openstackclient -y
-    
+
+COPY keystone.conf /etc/keystone.conf
 
 
 EXPOSE 35357 5000
 
-CMD ["/usr/bin/keystone-all"]
+COPY entrypoint.sh /entrypoint.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
 
