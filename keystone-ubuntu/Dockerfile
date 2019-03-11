@@ -17,6 +17,6 @@ COPY keystone.conf /etc/keystone.conf
 EXPOSE 35357 5000
 
 COPY entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-
