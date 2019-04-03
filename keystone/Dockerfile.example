@@ -24,8 +24,8 @@ RUN git clone https://github.com/openstack/keystone.git -b stable/queens keyston
     virtualenv venv && source venv/bin/activate && \
     pip install --upgrade pip && \
     pip install /build/keystone && \
-    pip install dogpile.cache==0.6.2
-#    tar -cvf keystone.tar.gz /build/keystone/venv/*
+    pip install dogpile.cache==0.6.2 && \
+    tar cvf /root/keystone.tar.gz /build/keystone/venv/*
 
 
 FROM alpine:3.8
@@ -54,6 +54,8 @@ RUN tar xvf /srv/keystone.tar.gz -C /srv && rm /srv/keystone.tar.gz &&\
     ln -s /srv/keystone/etc /etc/keystone && \
     chown keystone:keystone /var/log/keystone
 #    sed -i s,/home/keystone,/var/lib/keystone,g /etc/passwd
+
+RUN echo 'export PS1="[\u@keystone-$role] \W # "' >> /root/.bash_profile
 
 # Entrypoint
 #TODO []

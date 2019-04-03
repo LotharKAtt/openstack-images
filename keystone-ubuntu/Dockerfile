@@ -11,8 +11,8 @@ RUN apt update && \
     add-apt-repository cloud-archive:queens &&\
     apt install keystone python-openstackclient -y
 
-COPY keystone.conf /etc/keystone.conf
-
+COPY keystone.conf /etc/keystone/keystone.conf
+COPY bootstrap.sh /bootstrap.sh
 
 EXPOSE 35357 5000
 
