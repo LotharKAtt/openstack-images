@@ -10,7 +10,7 @@ ENV ADMIN_EMAIL=${ADMIN_EMAIL:-${ADMIN_USER_NAME}@example.com}
 RUN apt update && \
     apt install software-properties-common -y && \
     add-apt-repository cloud-archive:queens &&\
-    apt install uwsgi uwsgi-plugins-all -y &&\
+    apt install uwsgi uwsgi-plugin-python -y &&\
     apt install keystone python-openstackclient -y
 
 COPY keystone.conf /etc/keystone/keystone.conf
