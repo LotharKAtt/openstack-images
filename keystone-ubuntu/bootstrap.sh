@@ -1,6 +1,5 @@
 #!bin/bash
 
-
 # VYMYSLET JINAK az bude cas
 
 ADMIN_TOKEN=${ADMIN_TOKEN:-294a4c8a8a475f9b9836}
@@ -10,7 +9,7 @@ ADMIN_PASSWORD=cloudlab
 ADMIN_EMAIL=admin@example.com
 
 OS_TOKEN=$ADMIN_TOKEN
-OS_URL=${OS_AUTH_URL:-"http://keystonesvc:5000/v3"}
+OS_URL=${OS_AUTH_URL:-"http://keystone-svc:5000/v3"}
 OS_IDENTITY_API_VERSION=3
 
 
@@ -22,9 +21,9 @@ export OS_TOKEN OS_URL OS_IDENTITY_API_VERSION
 
 
 openstack service create  --name keystone identity
-openstack endpoint create --region RegionOne identity public http://keystonesvc:5000/v3
-openstack endpoint create --region RegionOne identity internal http://keystonesvc:5000/v3
-openstack endpoint create --region RegionOne identity admin http://keystonesvc:5000/v3
+openstack endpoint create --region RegionOne identity public http://keystone-svc:5000/v3
+openstack endpoint create --region RegionOne identity internal http://keystone-svc:5000/v3
+openstack endpoint create --region RegionOne identity admin http://keystone-svc:5000/v3
 openstack domain create --description "Default Domain" default
 openstack project create --domain default  --description "Admin Project" admin
 openstack user create --domain default --password cloudlab admin
@@ -37,7 +36,7 @@ export OS_USER_DOMAIN_NAME=default
 export OS_PROJECT_NAME=admin
 export OS_USERNAME=admin
 export OS_PASSWORD=${ADMIN_PASSWORD}
-export OS_AUTH_URL=http://${HOSTNAME}:5000/v3
+export OS_AUTH_URL=http://keystone-svc:5000/v3
 export OS_IDENTITY_API_VERSION=3
 export OS_IMAGE_API_VERSION=2
 EOF
