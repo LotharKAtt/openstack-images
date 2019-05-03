@@ -23,5 +23,7 @@ if [ -z $SKIP_FERNET ]; then
     keystone-manage fernet_setup --keystone-user root --keystone-group root
 fi
 
+echo 'export PS1="[\u@keystone-${COMPONENT}] \W # "' >> /root/.bash_profile
+
 echo "Starting keystone ${COMPONENT} endpoint"
 uwsgi --plugin http --plugin python --http :${BIND_PORT} --workers ${WORKERS} --wsgi-file $(which keystone-wsgi-${COMPONENT})
