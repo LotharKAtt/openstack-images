@@ -1,7 +1,5 @@
 #!/bin/bash
 
-echo "lol"
-bash
 if [ -z $SKIP_SYNCDB ]; then
     echo "DB sync"
     glance-manage db_sync

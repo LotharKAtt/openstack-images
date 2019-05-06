@@ -7,20 +7,15 @@ ADMIN_TENANT_NAME=admin
 ADMIN_USER_NAME=admin
 ADMIN_PASSWORD=cloudlab
 ADMIN_EMAIL=admin@example.com
-
 OS_TOKEN=$ADMIN_TOKEN
 OS_URL=${OS_AUTH_URL:-"http://keystone-svc:5000/v3"}
 OS_IDENTITY_API_VERSION=3
-
-
 keystone-manage db_sync
 keystone-manage fernet_setup --keystone-user root --keystone-group root
-
 export OS_TOKEN OS_URL OS_IDENTITY_API_VERSION
 
 
-
-openstack service create  --name keystone identity
+openstack service create --name keystone --description "OpenStack Identity" identity
 openstack endpoint create --region RegionOne identity public http://keystone-svc:5000/v3
 openstack endpoint create --region RegionOne identity internal http://keystone-svc:5000/v3
 openstack endpoint create --region RegionOne identity admin http://keystone-svc:5000/v3
@@ -28,6 +23,7 @@ openstack domain create --description "Default Domain" default
 openstack project create --domain default  --description "Admin Project" admin
 openstack user create --domain default --password cloudlab admin
 openstack role create admin
+openstack project create --domain default --description "Admin Project" admin
 openstack role add --project admin --user admin admin
 
 cat >~/openrc <<EOF
