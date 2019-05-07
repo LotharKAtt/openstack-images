@@ -7,7 +7,8 @@ RUN apt update && \
     apt install glance glance-api glance-registry glance-common python-glance python-glance-store python-glanceclient gettext-base python-memcache python-pycadf -y &&\
     apt install python-openstackclient -y
 
-#COPY glance.conf /etc/glance/glance.conf
+COPY glance-api.conf /etc/glance/glance-api.conf
+COPY glance-registry.conf /etc/glance/glance-registry.conf
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

@@ -2,7 +2,7 @@
 
 if [ -z $SKIP_SYNCDB ]; then
     echo "DB sync"
-    glance-manage db_sync
+    glance-manage db sync
 fi
 
 
