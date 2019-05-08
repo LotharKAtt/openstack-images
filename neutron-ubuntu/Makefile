@@ -4,12 +4,12 @@ VERSION=latest
 
 help:
 	@echo "Available options:"
-	@echo "  neutron-build          build of all images"
+	@echo "  build-neutron          build of all images"
 	@echo "  build-neutron-base     build of base image"
 	@echo "  build-neutron-server    build of admin image"
 	@echo "  push                    push all images to registry"
 
-neutron-build: \
+build-neutron: \
 	build-neutron-base \
 	build-neutron-server
 

@@ -4,13 +4,13 @@ VERSION=latest
 
 help:
 	@echo "Available options:"
-	@echo "  keystone-build          build of all images"
+	@echo "  build-keystone          build of all images"
 	@echo "  build-keystone-base     build of base image"
 	@echo "  build-keystone-admin    build of admin image"
 	@echo "  build-keystone-public   build of public image"
 	@echo "  push                    push all images to registry"
 
-keystone-build: \
+build-keystone: \
 	build-keystone-base \
 	build-keystone-admin \
 	build-keystone-public

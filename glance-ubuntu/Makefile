@@ -5,13 +5,13 @@ VERSION=latest
 
 help:
 	@echo "Available options:"
-	@echo "  keystone-build          build of all images"
+	@echo "  build-glance            build of all images"
 	@echo "  build-glance-base       build of base image"
 	@echo "  build-glance-api        build of api image"
 	@echo "  build-glance-registry   build of registry image"
 	@echo "  push                    push all images to registry"
 
-glance-build: \
+build-glance: \
 	build-glance-base \
 	build-glance-api \
 	build-glance-registry

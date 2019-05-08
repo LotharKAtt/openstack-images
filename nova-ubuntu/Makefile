@@ -5,7 +5,7 @@ VERSION=latest
 
 help:
 	@echo "Available options:"
-	@echo "  nova-build               build of all images"
+	@echo "  build-nova               build of all images"
 	@echo "  build-nova-base          build of base image"
 	@echo "  build-nova-api           build of api image"
 	@echo "  build-nova-conductor     build of registry image"
@@ -14,7 +14,7 @@ help:
 	@echo "  build-nova-scheduler     build of nova scheduler"
 	@echo "  push                     push all images to registry"
 
-glance-build: \
+build-nova: \
 	build-nova-base \
 	build-nova-api \
 	build-nova-conductor \

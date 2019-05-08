@@ -7,7 +7,7 @@ RUN apt update && \
     apt install neutron-server python-neutron-lbaas gettext-base python-pycadf -y &&\
     apt install python-openstackclient -y
 
-# COPY neutron.conf /etc/neutron/neutron.conf
+COPY neutron.conf /etc/neutron/neutron.conf
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
