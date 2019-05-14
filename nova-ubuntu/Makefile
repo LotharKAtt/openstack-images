@@ -10,8 +10,8 @@ help:
 	@echo "  build-nova-api           build of api image"
 	@echo "  build-nova-conductor     build of registry image"
 	@echo "  build-nova-novncproxy    build of novncproxy"
-	@echo "  build-nova-consoleauth   build of consloleauth"
-	@echo "  build-nova-scheduler     build of nova scheduler"
+	@echo "  build-nova-placement     build of placement"
+	@echo "  build-nova-scheduler     build of scheduler"
 	@echo "  push                     push all images to registry"
 
 build-nova: \
@@ -19,7 +19,7 @@ build-nova: \
 	build-nova-api \
 	build-nova-conductor \
 	build-nova-novncproxy \
-	build-nova-consoleauth \
+	build-nova-placement \
 	build-nova-scheduler
 
 
@@ -33,8 +33,8 @@ build-nova-api:
 	docker build -t ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-api:${VERSION} -f nova-api.Dockerfile .
 
 build-nova-consoleauth:
-	@echo "== Building nova-consoleauth"
-	docker build -t ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-consoleauth:${VERSION} -f nova-consoleauth.Dockerfile .
+	@echo "== Building nova-placement"
+	docker build -t ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-placement:${VERSION} -f nova-placement.Dockerfile .
 
 build-nova-conductor:
 	@echo "== Building nova-conductor"
@@ -52,6 +52,6 @@ push:
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-base:${VERSION}
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-api:${VERSION}
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-conductor:${VERSION}
-	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-consoleauth:${VERSION}
+	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-placement:${VERSION}
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-novncproxy:${VERSION}
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-scheduler:${VERSION}
