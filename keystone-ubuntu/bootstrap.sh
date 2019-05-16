@@ -47,6 +47,13 @@ openstack endpoint create --region RegionOne image admin http://glance-svc:9292
 openstack endpoint create --region RegionOne image internal http://glance-svc:9292
 openstack role add --project service --user glance admin
 
+openstack user create --domain default --password cloudlab nova
+openstack service create --name nova --description "OpenStack Compute" compute
+openstack endpoint create --region RegionOne compute public   http://nova-api-svc:8774/v2.1
+openstack endpoint create --region RegionOne compute admin    http://nova-api-svc:8774/v2.1
+openstack endpoint create --region RegionOne compute internal http://nova-api-svc:8774/v2.1
+openstack role add --project service --user nova admin
+
 cat >~/openrc <<EOF
 export OS_IDENTITY_API_VERSION=3
 export OS_AUTH_URL=http://keystone-pbl-svc:5000/v3
