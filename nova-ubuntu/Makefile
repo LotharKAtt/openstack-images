@@ -32,7 +32,7 @@ build-nova-api:
 	#TODO: make it universal
 	docker build -t ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-api:${VERSION} -f nova-api.Dockerfile .
 
-build-nova-consoleauth:
+build-nova-placement:
 	@echo "== Building nova-placement"
 	docker build -t ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-placement:${VERSION} -f nova-placement.Dockerfile .
 
