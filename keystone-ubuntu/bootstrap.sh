@@ -1,6 +1,6 @@
 #!/bin/bash
 
-
+# TODO: Init container
 keystone-manage fernet_setup --keystone-user root --keystone-group root
 keystone-manage bootstrap \
     --bootstrap-password cloudlab \
@@ -14,45 +14,10 @@ keystone-manage bootstrap \
     --bootstrap-internal-url http://keystone-pbl-svc:5000
 
 
-openstack service create --name keystone --description "OpenStack Identity" identity
-openstack endpoint create --region RegionOne identity public http://keystone-pbl-svc:5000/v3
-openstack endpoint create --region RegionOne identity internal http://keystone-pbl-svc:5000/v3
-openstack endpoint create --region RegionOne identity admin http://keystone-pbl-acsvc:5000/v3
-openstack domain create --description "Default Domain" default
-openstack project create --domain default  --description "Admin Project" admin
-openstack user create --domain default --password cloudlab admin
-openstack role create admin
-openstack project create --domain default --description "Admin Project" admin
-openstack role add --project admin --user admin admin
 
-openstack project create --domain default --description "Service Project" service
-
-
-
-
-
-openstack user create --domain default --password cloudlab neutron
-openstack service create --name neutron --description "OpenStack Networking" network
-openstack endpoint create --region RegionOne network public http://neutron-svc:9696
-openstack endpoint create --region RegionOne network admin http://neutron-svc:9696
-openstack endpoint create --region RegionOne network internal http://neutron-svc:9696
-openstack role add --project service --user neutron admin
-
-
-
-openstack user create --domain default --password cloudlab glance
-openstack service create --name glance --description "OpenStack Image" image
-openstack endpoint create --region RegionOne image public http://glance-svc:9292
-openstack endpoint create --region RegionOne image admin http://glance-svc:9292
-openstack endpoint create --region RegionOne image internal http://glance-svc:9292
-openstack role add --project service --user glance admin
-
-openstack user create --domain default --password cloudlab nova
-openstack service create --name nova --description "OpenStack Compute" compute
-openstack endpoint create --region RegionOne compute public   http://nova-api-svc:8774/v2.1
-openstack endpoint create --region RegionOne compute admin    http://nova-api-svc:8774/v2.1
-openstack endpoint create --region RegionOne compute internal http://nova-api-svc:8774/v2.1
-openstack role add --project service --user nova admin
+# openstack domain create --description "Default Domain" default
+# openstack user create --domain default --password cloudlab admin
+# openstack project create --domain default --description "Service Project" service
 
 cat >~/openrc <<EOF
 export OS_IDENTITY_API_VERSION=3
