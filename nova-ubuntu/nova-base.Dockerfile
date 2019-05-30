@@ -4,7 +4,7 @@ RUN apt update && \
     apt install software-properties-common -y && \
     add-apt-repository cloud-archive:queens &&\
     apt update && \
-    apt install nova-api nova-common nova-conductor nova-placement-api nova-scheduler python-openstackclient -y
+    apt install nova-api nova-common nova-conductor nova-placement-api nova-scheduler nova-novncproxy python-openstackclient -y
 
 COPY nova.conf /etc/nova/nova.conf
 
