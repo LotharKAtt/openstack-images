@@ -5,7 +5,7 @@ RUN apt update && \
     apt install software-properties-common -y && \
     add-apt-repository cloud-archive:queens &&\
     apt update && \
-    apt install neutron-server python-neutron-lbaas gettext-base python-pycadf -y &&\
+    apt install neutron-server neutron-dhcp-agent neutron-l3-agent neutron-metadata-agent neutron-openvswitch-agent python-neutron-lbaas gettext-base python-pycadf -y &&\
     apt install python-openstackclient -y
 
 COPY neutron.conf /etc/neutron/neutron.conf
