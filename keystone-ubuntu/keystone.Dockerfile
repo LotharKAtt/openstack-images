@@ -1,5 +1,4 @@
 FROM quay.io/lotharkatt/keystone-base:latest
-ENV COMPONENT admin
 
-EXPOSE 35357
+EXPOSE 5000
 ENTRYPOINT ["/entrypoint.sh"]
