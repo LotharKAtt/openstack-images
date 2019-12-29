@@ -20,7 +20,8 @@ build-nova: \
 	build-nova-conductor \
 	build-nova-novncproxy \
 	build-nova-placement \
-	build-nova-scheduler
+	build-nova-scheduler \
+	build-nova-compute
 
 
 build-nova-base:
@@ -48,6 +49,10 @@ build-nova-scheduler:
 	@echo "== Building nova-scheduler"
 	docker build -t ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-scheduler:${VERSION} -f nova-scheduler.Dockerfile .
 
+build-nova-compute:
+	@echo "== Building nova-compute"
+	docker build -t ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-compute:${VERSION} -f nova-compute.Dockerfile .
+
 push:
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-base:${VERSION}
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-api:${VERSION}
@@ -55,3 +60,4 @@ push:
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-placement:${VERSION}
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-novncproxy:${VERSION}
 	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-scheduler:${VERSION}
+	docker push ${REGISTRY}/${REGISTRY_NAMESPACE}/nova-compute:${VERSION}
